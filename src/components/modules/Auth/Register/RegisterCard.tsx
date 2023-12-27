@@ -1,3 +1,5 @@
+import { useAuthContext } from "@/contexts/AuthContext";
+import { setAuthCookie } from "@/helpers/cookie";
 import { getMinCharMessage, getRequiredMessage } from "@/helpers/form";
 import { prompNotification } from "@/helpers/notification";
 import { hasNumberRegex } from "@/helpers/validation";
@@ -6,7 +8,7 @@ import { IRegisterRequest } from "@/interfaces/requests/Auth";
 import { Routes } from "@/routes/routes";
 import { useRegisterMutation } from "@/services/mutation/Auth";
 import { Button, Card, Input, Row, Space, Typography, Form } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 interface IRegisterForm extends IRegisterRequest {
@@ -35,10 +37,25 @@ const schema: yup.ObjectSchema<IRegisterForm> = yup.object({
 export const RegisterCard = () => {
     const { form, yupSync } = useFormUtility<IRegisterForm>({ schema });
     const watch = Form.useWatch([], form);
+    const { afterLoginRegister } = useAuthContext();
+
+    const navigate = useNavigate();
 
     const mutation = useRegisterMutation({
         onError: (error) => {
-            prompNotification({ method: "error", message: error as string });
+            prompNotification({ method: "error", message: error.message });
+        },
+        onSuccess: (response) => {
+            const {
+                data: { token, user },
+            } = response;
+            setAuthCookie(token);
+            afterLoginRegister(user);
+            navigate(Routes.Dashboard, { replace: true });
+            prompNotification({
+                method: "success",
+                message: "Register successfully",
+            });
         },
     });
 
