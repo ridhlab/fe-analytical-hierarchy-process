@@ -1,4 +1,3 @@
-import LoaderFullscreen from "@/components/shared/Loader/LoaderFullscreen";
 import { useAuthContext } from "@/contexts/AuthContext";
 import React from "react";
 import { Navigate } from "react-router-dom";
@@ -9,8 +8,7 @@ interface IProps {
 }
 
 const PublicRoute = ({ children }: IProps) => {
-    const { isLoading, isAuthenticate } = useAuthContext();
-    if (isLoading) return <LoaderFullscreen />;
+    const { isAuthenticate } = useAuthContext();
     return isAuthenticate ? <Navigate to={Routes.Dashboard} /> : children;
 };
 
