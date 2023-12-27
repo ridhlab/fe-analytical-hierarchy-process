@@ -10,8 +10,13 @@ interface IProps {
 
 const PrivateRoute = ({ children }: IProps) => {
     const { isLoading, isAuthenticate } = useAuthContext();
-    if (isLoading) return <LoaderFullscreen />;
-    return !isAuthenticate ? <Navigate to={Routes.Login} /> : children;
+    return !isAuthenticate ? (
+        <Navigate to={Routes.Login} />
+    ) : isLoading ? (
+        <LoaderFullscreen />
+    ) : (
+        children
+    );
 };
 
 export default PrivateRoute;
