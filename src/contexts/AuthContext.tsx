@@ -30,8 +30,6 @@ interface IProps {
     children: React.ReactNode;
 }
 
-const authReducer = () => {};
-
 export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     const { isLoading, setIsLoading } = useLoading();
     const [user, setUser] = React.useState<IUser>(null);
