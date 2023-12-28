@@ -1,4 +1,3 @@
-import { useAuthContext } from "@/contexts/AuthContext";
 import { setAuthCookie } from "@/helpers/cookie";
 import { getMinCharMessage, getRequiredMessage } from "@/helpers/form";
 import { prompNotification } from "@/helpers/notification";
@@ -8,7 +7,7 @@ import { ILoginRequest } from "@/interfaces/requests/Auth";
 import { Routes } from "@/routes/routes";
 import { useLoginMutation } from "@/services/mutation/Auth";
 import { Button, Card, Input, Row, Space, Typography, Form } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 
 const schema: yup.ObjectSchema<ILoginRequest> = yup.object({
@@ -28,9 +27,6 @@ const schema: yup.ObjectSchema<ILoginRequest> = yup.object({
 export const LoginCard = () => {
     const { form, yupSync } = useFormUtility<ILoginRequest>({ schema });
     const watch = Form.useWatch([], form);
-    const { afterLoginRegister } = useAuthContext();
-
-    const navigate = useNavigate();
 
     const mutation = useLoginMutation({
         onError: (error) => {
@@ -38,11 +34,12 @@ export const LoginCard = () => {
         },
         onSuccess: (response) => {
             const {
-                data: { token, user },
+                data: { token },
             } = response;
             setAuthCookie(token);
-            afterLoginRegister(user);
-            navigate(Routes.Dashboard, { replace: true });
+            setTimeout(() => {
+                window.location.replace(Routes.Dashboard);
+            }, 1000);
             prompNotification({
                 method: "success",
                 message: "Login successfully",

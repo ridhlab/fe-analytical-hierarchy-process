@@ -2,7 +2,7 @@
 import { ILoginRequest, IRegisterRequest } from "@/interfaces/requests/Auth";
 import { ILoginResponse, IRegisterResponse } from "@/interfaces/responses/Auth";
 import { IBaseResponse } from "@/interfaces/responses/base";
-import { login, register } from "@/services/apis/Auth";
+import { login, logout, register } from "@/services/apis/Auth";
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 
 export const useRegisterMutation = (
@@ -34,6 +34,23 @@ export const useLoginMutation = (
         mutationKey: ["login"],
         mutationFn: (payload: ILoginRequest) => {
             return login(payload);
+        },
+        ...options,
+    });
+};
+
+export const useLogoutMutation = (
+    options?: UseMutationOptions<
+        IBaseResponse<unknown>,
+        IBaseResponse<unknown>,
+        unknown,
+        unknown
+    >
+) => {
+    return useMutation({
+        mutationKey: ["logout"],
+        mutationFn: () => {
+            return logout();
         },
         ...options,
     });

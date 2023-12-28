@@ -11,8 +11,6 @@ interface IAuthContextData {
     isLoading: boolean;
     isError: boolean;
     error: IBaseResponse<unknown>;
-    afterLoginRegister: (user: IUser) => void;
-    afterLogout: () => void;
 }
 
 const AuthContext = React.createContext<IAuthContextData>({
@@ -21,8 +19,6 @@ const AuthContext = React.createContext<IAuthContextData>({
     isLoading: false,
     isError: false,
     error: null,
-    afterLoginRegister: () => {},
-    afterLogout: () => {},
 });
 
 interface IProps {
@@ -30,25 +26,14 @@ interface IProps {
 }
 
 export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
-    const [user, setUser] = React.useState<IUser>(null);
     const queryUser = useGetUser();
-
-    const afterLoginRegister = (user: IUser) => {
-        setUser(user);
-    };
-
-    const afterLogout = () => {
-        setUser(null);
-    };
 
     const authState: IAuthContextData = {
         isLoading: queryUser.isLoading,
-        user: user ?? queryUser.data,
+        user: queryUser.data,
         error: queryUser.error,
         isError: !!queryUser.error,
         isAuthenticate: !!getCookie(AUTH_TOKEN_NAME),
-        afterLoginRegister,
-        afterLogout,
     };
 
     return (

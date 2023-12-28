@@ -1,5 +1,5 @@
 import { EndpointApi } from "@/routes/routes";
-import { axiosInstance } from "..";
+import { axiosAuthInstance, axiosInstance } from "..";
 import { ILoginRequest, IRegisterRequest } from "@/interfaces/requests/Auth";
 import { AxiosError } from "axios";
 
@@ -18,6 +18,15 @@ export const register = async (payload: IRegisterRequest) => {
             EndpointApi.Register,
             payload
         );
+        return response.data;
+    } catch (error) {
+        throw (error as AxiosError).response.data;
+    }
+};
+
+export const logout = async () => {
+    try {
+        const response = await axiosAuthInstance.post(EndpointApi.Logout);
         return response.data;
     } catch (error) {
         throw (error as AxiosError).response.data;

@@ -10,4 +10,9 @@ export const colorConfig = {
         lightGray: "#E7E7E7",
         white: "#FFFFFF",
     },
+    feedback: {
+        success: "#52C41A",
+        warning: "#faad14",
+        error: "#ff4d4f",
+    },
 };

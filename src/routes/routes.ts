@@ -11,5 +11,6 @@ export enum Routes {
 export enum EndpointApi {
     Login = "/login",
     Register = "/register",
+    Logout = "/logout",
     GetUser = "/user",
 }
