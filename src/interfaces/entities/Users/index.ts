@@ -4,6 +4,6 @@ export interface IUser extends IBaseEntity {
     id: string;
     name: string;
     email: string;
-    emailVerifiedAt: string;
+    emailVerifiedAt?: string;
     permissions?: unknown[];
 }

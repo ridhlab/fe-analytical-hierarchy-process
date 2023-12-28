@@ -1,3 +1,4 @@
+import { setAuthCookie } from "@/helpers/cookie";
 import { getMinCharMessage, getRequiredMessage } from "@/helpers/form";
 import { prompNotification } from "@/helpers/notification";
 import { hasNumberRegex } from "@/helpers/validation";
@@ -29,7 +30,20 @@ export const LoginCard = () => {
 
     const mutation = useLoginMutation({
         onError: (error) => {
-            prompNotification({ method: "error", message: error as string });
+            prompNotification({ method: "error", message: error.message });
+        },
+        onSuccess: (response) => {
+            const {
+                data: { token },
+            } = response;
+            setAuthCookie(token);
+            setTimeout(() => {
+                window.location.replace(Routes.Dashboard);
+            }, 1000);
+            prompNotification({
+                method: "success",
+                message: "Login successfully",
+            });
         },
     });
 
