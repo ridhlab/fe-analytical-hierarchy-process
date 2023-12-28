@@ -12,6 +12,10 @@ const DashboardPage = React.lazy(() => import("@/pages/Dashboard"));
 const VariableInputIndexPage = React.lazy(
     () => import("@/pages/VariableInput")
 );
+const VariableInputFormPage = React.lazy(
+    () => import("@/pages/VariableInput/Form")
+);
+
 const VariableOutputIndexPage = React.lazy(
     () => import("@/pages/VariableOutput")
 );
@@ -51,6 +55,22 @@ export const router = createBrowserRouter([
         element: withSuspense(
             <PrivateRoute>
                 <VariableInputIndexPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.VariableInputCreate,
+        element: withSuspense(
+            <PrivateRoute>
+                <VariableInputFormPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.VariableInputEdit,
+        element: withSuspense(
+            <PrivateRoute>
+                <VariableInputFormPage editPage />
             </PrivateRoute>
         ),
     },
