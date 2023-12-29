@@ -1,4 +1,13 @@
-import { Button, Grid, Layout, Menu, Row } from "antd";
+import {
+    Breadcrumb,
+    Button,
+    Grid,
+    Layout,
+    Menu,
+    Row,
+    Space,
+    Typography,
+} from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import React from "react";
@@ -12,11 +21,13 @@ import {
 import { ItemType, MenuItemType } from "antd/es/menu/hooks/useItems";
 import { colorConfig } from "@/themes/config";
 import Avatar from "@/components/layout/Avatar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "@/routes/routes";
 
 interface IProps {
     children: React.ReactNode;
+    title: string;
+    breadcrumbs?: { label: string; href: string }[];
 }
 
 const iconSidebarStyle = {
@@ -31,7 +42,7 @@ const menuKey = {
     Result: Routes.ResultIndex,
 };
 
-const MainLayout: React.FC<IProps> = ({ children }) => {
+const MainLayout: React.FC<IProps> = ({ children, ...props }) => {
     const [isSiderCollapsed, setIsSiderCollapsed] = React.useState(false);
     const { md } = Grid.useBreakpoint();
     const navigate = useNavigate();
@@ -89,6 +100,7 @@ const MainLayout: React.FC<IProps> = ({ children }) => {
                     top: 0,
                     bottom: 0,
                     padding: "1rem 0",
+                    zIndex: 50,
                 }}
                 trigger={null}
                 collapsible
@@ -111,6 +123,10 @@ const MainLayout: React.FC<IProps> = ({ children }) => {
                         background: colorConfig.neutral.white,
                         display: "flex",
                         alignItems: "center",
+                        position: "sticky",
+                        top: 0,
+                        zIndex: 5,
+                        boxShadow: "15px -3px 21px -5px rgba(0,0,0,0.75)",
                     }}
                 >
                     <Row
@@ -141,11 +157,29 @@ const MainLayout: React.FC<IProps> = ({ children }) => {
                     style={{
                         backgroundColor: colorConfig.neutral.lightGray,
                         padding: isSiderCollapsed
-                            ? "2rem 2rem 2rem 5rem"
-                            : "2rem 2rem 2rem 14.5rem",
+                            ? "1rem 2rem 2rem 5rem"
+                            : "1rem 2rem 2rem 14.5rem",
                     }}
                 >
-                    {children}
+                    <Space
+                        direction="vertical"
+                        style={{ width: "100%" }}
+                        size={24}
+                    >
+                        <Space direction="vertical" size={0}>
+                            <Typography.Title level={4}>
+                                {props.title}
+                            </Typography.Title>
+                            <Breadcrumb
+                                items={props.breadcrumbs?.map(
+                                    ({ href, label }) => ({
+                                        title: <Link to={href}>{label}</Link>,
+                                    })
+                                )}
+                            />
+                        </Space>
+                        {children}
+                    </Space>
                 </Content>
             </Layout>
         </Layout>
