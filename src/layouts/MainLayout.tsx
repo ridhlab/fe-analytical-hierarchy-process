@@ -12,6 +12,7 @@ import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import React from "react";
 import {
+    BlockOutlined,
     DatabaseOutlined,
     LineChartOutlined,
     MenuFoldOutlined,
@@ -40,6 +41,7 @@ const menuKey = {
     VariableInput: Routes.VariableInputIndex,
     VariableOutput: Routes.VariableOutputIndex,
     Result: Routes.ResultIndex,
+    MatrixCompare: Routes.MatrixCompares,
 };
 
 const MainLayout: React.FC<IProps> = ({ children, ...props }) => {
@@ -69,6 +71,12 @@ const MainLayout: React.FC<IProps> = ({ children, ...props }) => {
                 label: "Variable Output",
                 icon: <DatabaseOutlined style={iconSidebarStyle} />,
                 onClick: () => navigate(Routes.VariableOutputIndex),
+            },
+            {
+                key: menuKey.MatrixCompare,
+                label: "Matrix Compares",
+                icon: <BlockOutlined style={iconSidebarStyle} />,
+                onClick: () => navigate(Routes.MatrixCompares),
             },
             {
                 key: menuKey.Result,

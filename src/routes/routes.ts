@@ -14,6 +14,9 @@ export enum Routes {
     VariableOutputCreate = "/variable-output/create",
     VariableOutputEdit = "/variable-output/:id/edit",
 
+    MatrixCompares = "/matrix-compares",
+    MatrixComparesEdit = "/matrix-compares/edit-by-input/:inputId",
+
     ResultIndex = "/result",
 }
 

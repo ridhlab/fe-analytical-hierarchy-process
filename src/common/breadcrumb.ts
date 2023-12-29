@@ -41,6 +41,18 @@ export const Breadcrumbs = {
             },
         ],
     },
+    MatrixCompare: {
+        Index: () => [
+            { label: "Matrix Compares", href: Routes.MatrixCompares },
+        ],
+        Edit: (inputId: string) => [
+            { label: "Matrix Compares", href: Routes.MatrixCompares },
+            {
+                label: "Edit Matrix Compares",
+                href: parsingRoute(Routes.MatrixCompares, { inputId }),
+            },
+        ],
+    },
     Result: {
         Index: () => [{ label: "Result Predict", href: Routes.ResultIndex }],
     },
