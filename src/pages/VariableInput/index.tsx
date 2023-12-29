@@ -54,6 +54,7 @@ const VariableInputIndex: React.FC = () => {
                     <LoaderCenter />
                 ) : (
                     <Table
+                        bordered
                         dataSource={query.data.data}
                         columns={columns}
                         pagination={false}

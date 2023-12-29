@@ -26,6 +26,20 @@ export const Breadcrumbs = {
         Index: () => [
             { label: "Variable Output", href: Routes.VariableOutputIndex },
         ],
+        Create: () => [
+            { label: "Variable Output", href: Routes.VariableOutputIndex },
+            {
+                label: "Create Variable Output",
+                href: Routes.VariableOutputCreate,
+            },
+        ],
+        Edit: (id: string) => [
+            { label: "Variable Output", href: Routes.VariableOutputIndex },
+            {
+                label: "Edit Variable Output",
+                href: parsingRoute(Routes.VariableOutputEdit, { id }),
+            },
+        ],
     },
     Result: {
         Index: () => [{ label: "Result Predict", href: Routes.ResultIndex }],

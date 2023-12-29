@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 const LoginPage = React.lazy(() => import("@/pages/Auth/Login"));
 const RegisterPage = React.lazy(() => import("@/pages/Auth/Register"));
 const DashboardPage = React.lazy(() => import("@/pages/Dashboard"));
+
 const VariableInputIndexPage = React.lazy(
     () => import("@/pages/VariableInput")
 );
@@ -19,6 +20,10 @@ const VariableInputFormPage = React.lazy(
 const VariableOutputIndexPage = React.lazy(
     () => import("@/pages/VariableOutput")
 );
+const VariableOutputFormPage = React.lazy(
+    () => import("@/pages/VariableOutput/Form")
+);
+
 const ResultIndexPage = React.lazy(() => import("@/pages/Result"));
 
 export const withSuspense = (component: ReactNode) => {
@@ -79,6 +84,22 @@ export const router = createBrowserRouter([
         element: withSuspense(
             <PrivateRoute>
                 <VariableOutputIndexPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.VariableOutputCreate,
+        element: withSuspense(
+            <PrivateRoute>
+                <VariableOutputFormPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.VariableOutputEdit,
+        element: withSuspense(
+            <PrivateRoute>
+                <VariableOutputFormPage editPage />
             </PrivateRoute>
         ),
     },
