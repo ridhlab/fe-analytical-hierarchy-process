@@ -18,10 +18,12 @@ const VariableInputIndex: React.FC = () => {
         numberColumns(),
         {
             title: "Name",
+            key: "name",
             dataIndex: "name",
         },
         {
             title: "Actions",
+            key: "actions",
             dataIndex: "id",
             render: (id) => (
                 <RowActionButtons
@@ -44,11 +46,11 @@ const VariableInputIndex: React.FC = () => {
             breadcrumbs={Breadcrumbs.VariableInput.Index()}
         >
             <Card
-                extra={[
+                extra={
                     <Button href={Routes.VariableInputCreate} type="primary">
                         Create
-                    </Button>,
-                ]}
+                    </Button>
+                }
             >
                 {query.isLoading || query.isFetching ? (
                     <LoaderCenter />
