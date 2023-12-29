@@ -1,7 +1,7 @@
-import { Routes } from "@/routes/routes";
+import { EndpointApi, Routes } from "@/routes/routes";
 
 export const parsingRoute = (
-    url: Routes,
+    url: Routes | EndpointApi,
     propsParams?: Record<string, string | number>
 ): string => {
     let newUrl: string = url;

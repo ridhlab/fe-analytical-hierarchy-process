@@ -27,12 +27,6 @@ const VariableInputIndex: React.FC = () => {
                 <RowActionButtons
                     actions={[
                         {
-                            type: "detail",
-                            href: parsingRoute(Routes.VariableInputDetail, {
-                                id,
-                            }),
-                        },
-                        {
                             type: "edit",
                             href: parsingRoute(Routes.VariableInputEdit, {
                                 id,
@@ -56,7 +50,7 @@ const VariableInputIndex: React.FC = () => {
                     </Button>,
                 ]}
             >
-                {query.isLoading ? (
+                {query.isLoading || query.isFetching ? (
                     <LoaderCenter />
                 ) : (
                     <Table
