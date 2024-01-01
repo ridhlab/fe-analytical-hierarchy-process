@@ -1,5 +1,4 @@
 import { Breadcrumbs } from "@/common/breadcrumb";
-import Button from "@/components/shared/Button/Button";
 import LoaderCenter from "@/components/shared/Loader/LoaderCenter";
 import RowActionButtons from "@/components/shared/Table/RowActionButtons";
 import { parsingRoute } from "@/helpers/route";
@@ -8,11 +7,11 @@ import { IVariableInput } from "@/interfaces/entities/VariableInput";
 import MainLayout from "@/layouts/MainLayout";
 import { Routes } from "@/routes/routes";
 import { useVariableInputQueryIndex } from "@/services/query/VariableInput";
-import { Card, Table } from "antd";
-import { ColumnsType } from "antd/es/table";
+import { Card } from "antd";
+import Table, { ColumnsType } from "antd/es/table";
 import React from "react";
 
-const VariableInputIndex: React.FC = () => {
+const MatrixCompareIndex: React.FC = () => {
     const query = useVariableInputQueryIndex();
     const columns: ColumnsType<IVariableInput> = [
         numberColumns(),
@@ -30,8 +29,8 @@ const VariableInputIndex: React.FC = () => {
                     actions={[
                         {
                             type: "edit",
-                            href: parsingRoute(Routes.VariableInputEdit, {
-                                id,
+                            href: parsingRoute(Routes.MatrixComparesEdit, {
+                                inputId: id,
                             }),
                         },
                     ]}
@@ -39,19 +38,12 @@ const VariableInputIndex: React.FC = () => {
             ),
         },
     ];
-
     return (
         <MainLayout
-            title="Variable Input"
-            breadcrumbs={Breadcrumbs.VariableInput.Index()}
+            title="Matrix Compares"
+            breadcrumbs={Breadcrumbs.MatrixCompare.Index()}
         >
-            <Card
-                extra={
-                    <Button href={Routes.VariableInputCreate} type="primary">
-                        Create
-                    </Button>
-                }
-            >
+            <Card>
                 {query.isLoading || query.isFetching ? (
                     <LoaderCenter />
                 ) : (
@@ -67,4 +59,4 @@ const VariableInputIndex: React.FC = () => {
     );
 };
 
-export default VariableInputIndex;
+export default MatrixCompareIndex;

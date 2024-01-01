@@ -50,7 +50,15 @@ const RowActionButtons: React.FC<IProps> = ({ actions }) => {
                 return <React.Fragment></React.Fragment>;
         }
     };
-    return <Space>{actions.map((action) => renderButtonAction(action))}</Space>;
+    return (
+        <Space>
+            {actions.map((action, index) => (
+                <React.Fragment key={index}>
+                    {renderButtonAction(action)}
+                </React.Fragment>
+            ))}
+        </Space>
+    );
 };
 
 export default RowActionButtons;

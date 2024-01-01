@@ -14,6 +14,9 @@ export enum Routes {
     VariableOutputCreate = "/variable-output/create",
     VariableOutputEdit = "/variable-output/:id/edit",
 
+    MatrixCompares = "/matrix-compares",
+    MatrixComparesEdit = "/matrix-compares/edit-by-input/:inputId",
+
     ResultIndex = "/result",
 }
 
@@ -32,4 +35,7 @@ export enum EndpointApi {
     VariableOutputDetail = "/variable-output/:id",
     VariableOutputStore = "/variable-output/store",
     VariableOutputUpdate = "/variable-output/:id/update",
+
+    MatrixCompareIndexByVariableInputId = "/matrix-compare?variable_input_id=:inputId",
+    MatrixCompareUpdateByInputId = "/matrix-compare/edit-by-input-id/:inputId",
 }

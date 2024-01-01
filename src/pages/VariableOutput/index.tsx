@@ -18,10 +18,12 @@ const VariableOutputIndex: React.FC = () => {
         numberColumns(),
         {
             title: "Name",
+            key: "name",
             dataIndex: "name",
         },
         {
             title: "Actions",
+            key: "actions",
             dataIndex: "id",
             render: (id) => (
                 <RowActionButtons
@@ -44,11 +46,11 @@ const VariableOutputIndex: React.FC = () => {
             breadcrumbs={Breadcrumbs.VariableOutput.Index()}
         >
             <Card
-                extra={[
+                extra={
                     <Button href={Routes.VariableOutputCreate} type="primary">
                         Create
-                    </Button>,
-                ]}
+                    </Button>
+                }
             >
                 {query.isLoading || query.isFetching ? (
                     <LoaderCenter />

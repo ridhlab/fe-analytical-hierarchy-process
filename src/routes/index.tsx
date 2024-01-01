@@ -24,6 +24,13 @@ const VariableOutputFormPage = React.lazy(
     () => import("@/pages/VariableOutput/Form")
 );
 
+const MatrixCompareIndexPage = React.lazy(
+    () => import("@/pages/MatrixCompares")
+);
+const MatrixCompareEditByInputPage = React.lazy(
+    () => import("@/pages/MatrixCompares/EditByInputId")
+);
+
 const ResultIndexPage = React.lazy(() => import("@/pages/Result"));
 
 export const withSuspense = (component: ReactNode) => {
@@ -100,6 +107,22 @@ export const router = createBrowserRouter([
         element: withSuspense(
             <PrivateRoute>
                 <VariableOutputFormPage editPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.MatrixCompares,
+        element: withSuspense(
+            <PrivateRoute>
+                <MatrixCompareIndexPage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.MatrixComparesEdit,
+        element: withSuspense(
+            <PrivateRoute>
+                <MatrixCompareEditByInputPage />
             </PrivateRoute>
         ),
     },

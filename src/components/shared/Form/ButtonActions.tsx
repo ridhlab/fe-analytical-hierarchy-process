@@ -8,7 +8,11 @@ interface IProps {
 const ButtonAction: React.FC<IProps> = ({ actions }) => {
     return (
         <Row justify="end">
-            <Space>{actions.map((action) => action)}</Space>
+            <Space>
+                {actions.map((action, index) => (
+                    <React.Fragment key={index}>{action}</React.Fragment>
+                ))}
+            </Space>
         </Row>
     );
 };
