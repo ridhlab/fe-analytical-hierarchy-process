@@ -29,8 +29,8 @@ const MatrixCompareIndex: React.FC = () => {
                     actions={[
                         {
                             type: "edit",
-                            href: parsingRoute(Routes.VariableInputEdit, {
-                                id,
+                            href: parsingRoute(Routes.MatrixComparesEdit, {
+                                inputId: id,
                             }),
                         },
                     ]}

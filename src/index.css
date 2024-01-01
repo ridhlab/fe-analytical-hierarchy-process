@@ -9,3 +9,20 @@
 body{
     background-color:#E7E7E7;
 }
+
+#table-matrix-compares > div > div > table > thead.ant-table-thead > tr > th.ant-table-cell {
+    font-weight: normal;
+}
+
+#table-matrix-compares > div > div > table > tbody > tr:last-child {
+    background-color: #001529;
+}
+
+
+#table-matrix-compares > div > div > table > tbody > tr:last-child:hover {
+    background-color: #001529;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+    background: none !important;
+}

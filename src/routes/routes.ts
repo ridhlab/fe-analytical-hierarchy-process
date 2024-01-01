@@ -35,4 +35,6 @@ export enum EndpointApi {
     VariableOutputDetail = "/variable-output/:id",
     VariableOutputStore = "/variable-output/store",
     VariableOutputUpdate = "/variable-output/:id/update",
+
+    MatrixCompareIndexByVariableInputId = "/matrix-compare?variable_input_id=:inputId",
 }
