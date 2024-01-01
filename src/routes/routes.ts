@@ -18,6 +18,8 @@ export enum Routes {
     MatrixComparesEdit = "/matrix-compares/edit-by-input/:inputId",
 
     ResultIndex = "/result",
+    ResultCreate = "/result/create",
+    ResultDetail = "/result/:id",
 }
 
 export enum EndpointApi {
@@ -38,4 +40,8 @@ export enum EndpointApi {
 
     MatrixCompareIndexByVariableInputId = "/matrix-compare?variable_input_id=:inputId",
     MatrixCompareUpdateByInputId = "/matrix-compare/edit-by-input-id/:inputId",
+
+    ResultByUserLogin = "/result-by-user-login",
+    ResultDetail = "/result/:id",
+    ResultPredict = "/predict",
 }

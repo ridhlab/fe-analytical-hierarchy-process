@@ -55,5 +55,16 @@ export const Breadcrumbs = {
     },
     Result: {
         Index: () => [{ label: "Result Predict", href: Routes.ResultIndex }],
+        Create: () => [
+            { label: "Result Predict", href: Routes.ResultIndex },
+            { label: "Create", href: Routes.ResultCreate },
+        ],
+        Detail: (id) => [
+            { label: "Result Predict", href: Routes.ResultIndex },
+            {
+                label: "Detail",
+                href: parsingRoute(Routes.ResultDetail, { id }),
+            },
+        ],
     },
 };
