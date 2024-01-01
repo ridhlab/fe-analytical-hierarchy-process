@@ -3,17 +3,21 @@ import CellMatrixCompare from "@/components/modules/MatrixCompare/CellMatrixComp
 import Button from "@/components/shared/Button/Button";
 import LoaderCenter from "@/components/shared/Loader/LoaderCenter";
 import { MatrixCompareHelper } from "@/helpers/matrix-compares";
+import { modalConfirm } from "@/helpers/modal-confirm";
 import { prompNotification } from "@/helpers/notification";
 import { getDecimalPlace } from "@/helpers/number";
 import { IMatrixCompare } from "@/interfaces/entities/MatrixCompares";
 import { IVariableOutput } from "@/interfaces/entities/VariableOutput";
+import { IMatrixComparesUpdateByVariableInputId } from "@/interfaces/requests/MarixCompare";
 import MainLayout from "@/layouts/MainLayout";
+import { Routes } from "@/routes/routes";
+import { useMatrixCompareByVariableInputIdUpdateQuery } from "@/services/mutation/MatrixCompare";
 import { useMatrixCompareByVariableInputIdQuery } from "@/services/query/MatrixCompare";
 import { useVariableOutputQueryIndex } from "@/services/query/VariableOutput";
 import { Card, Form, Space, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export interface IFormSchemaMatrixCompares {
     matrixCompares: Pick<
@@ -24,6 +28,8 @@ export interface IFormSchemaMatrixCompares {
 
 const EditByInputId: React.FC = () => {
     const { inputId } = useParams();
+    const navigate = useNavigate();
+
     const queryMatrixCompare = useMatrixCompareByVariableInputIdQuery(inputId);
     const queryVariableOutput = useVariableOutputQueryIndex();
 
@@ -32,6 +38,19 @@ const EditByInputId: React.FC = () => {
         queryMatrixCompare.isFetching ||
         queryVariableOutput.isLoading ||
         queryVariableOutput.isFetching;
+
+    const mutationUpdate = useMatrixCompareByVariableInputIdUpdateQuery(
+        inputId,
+        {
+            onSuccess: ({ message }) => {
+                prompNotification({ message, method: "success" });
+                navigate(Routes.MatrixCompares);
+            },
+            onError: ({ message }) => {
+                prompNotification({ message, method: "error" });
+            },
+        }
+    );
 
     const [form] = Form.useForm<IFormSchemaMatrixCompares>();
 
@@ -221,14 +240,33 @@ const EditByInputId: React.FC = () => {
     };
 
     const updateMatrixCompare = () => {
-        const payload = form.getFieldsValue();
-        console.log(payload);
         if (consistencyRatio >= 0.1) {
             return prompNotification({
                 method: "error",
                 message: "CR Must be under 0.1",
             });
         }
+
+        modalConfirm({
+            title: "Are you sure to update?",
+            onOk: () => {
+                const dataSubmitted = form.getFieldsValue();
+                const payload: IMatrixComparesUpdateByVariableInputId = {
+                    matrixCompares: dataSubmitted.matrixCompares.map(
+                        ({
+                            compare1VariableOutputId,
+                            compare2VariableOutputId,
+                            value,
+                        }) => ({
+                            compare1VariableOutputId,
+                            compare2VariableOutputId,
+                            value,
+                        })
+                    ),
+                };
+                mutationUpdate.mutate(payload);
+            },
+        });
     };
 
     React.useEffect(() => {

@@ -37,4 +37,5 @@ export enum EndpointApi {
     VariableOutputUpdate = "/variable-output/:id/update",
 
     MatrixCompareIndexByVariableInputId = "/matrix-compare?variable_input_id=:inputId",
+    MatrixCompareUpdateByInputId = "/matrix-compare/edit-by-input-id/:inputId",
 }
