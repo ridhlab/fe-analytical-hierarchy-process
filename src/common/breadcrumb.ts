@@ -57,7 +57,7 @@ export const Breadcrumbs = {
         Index: () => [{ label: "Result Predict", href: Routes.ResultIndex }],
         Create: () => [
             { label: "Result Predict", href: Routes.ResultIndex },
-            { label: "Create", href: Routes.ResultCreate },
+            { label: "Predict", href: Routes.ResultCreate },
         ],
         Detail: (id) => [
             { label: "Result Predict", href: Routes.ResultIndex },

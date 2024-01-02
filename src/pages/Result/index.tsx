@@ -1,4 +1,5 @@
 import { Breadcrumbs } from "@/common/breadcrumb";
+import Button from "@/components/shared/Button/Button";
 import LoaderCenter from "@/components/shared/Loader/LoaderCenter";
 import RowActionButtons from "@/components/shared/Table/RowActionButtons";
 import { parsingRoute } from "@/helpers/route";
@@ -38,7 +39,13 @@ const ResultIndex: React.FC = () => {
     ];
     return (
         <MainLayout title="Result" breadcrumbs={Breadcrumbs.Result.Index()}>
-            <Card>
+            <Card
+                extra={
+                    <Button href={Routes.ResultCreate} type="primary">
+                        Create
+                    </Button>
+                }
+            >
                 {query.isLoading || query.isFetching ? (
                     <LoaderCenter />
                 ) : (
