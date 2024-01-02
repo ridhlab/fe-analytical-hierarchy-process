@@ -7,5 +7,5 @@ export interface IResult extends IBaseEntity {
     name: string;
     userId: string;
     user?: IUser;
-    inputValues: IInputValue[];
+    inputValues?: IInputValue[];
 }

@@ -14,3 +14,13 @@ export interface IPredict {
     }[];
 }
 export interface IResultPredictResponse extends IBaseResponse<IPredict> {}
+
+export interface IResultPredictByResultIdResponse
+    extends IBaseResponse<{
+        result: IResult;
+        predict: {
+            variableOutputId: number;
+            variableOutputName: string;
+            value: number;
+        }[];
+    }> {}

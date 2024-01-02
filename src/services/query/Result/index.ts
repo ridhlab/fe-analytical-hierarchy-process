@@ -1,6 +1,14 @@
-import { IResultListResponse } from "@/interfaces/responses/Result";
+import {
+    IResultDetailResponse,
+    IResultListResponse,
+    IResultPredictByResultIdResponse,
+} from "@/interfaces/responses/Result";
 import { IBaseResponse } from "@/interfaces/responses/base";
-import { resultGetByUserLogin } from "@/services/apis/Result";
+import {
+    resultGetById,
+    resultGetByUserLogin,
+    resultPredictByResultId,
+} from "@/services/apis/Result";
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 
 export const useResultByUserLoginQuery = (
@@ -9,6 +17,33 @@ export const useResultByUserLoginQuery = (
     return useQuery({
         queryKey: ["get-result-by-user-login"],
         queryFn: () => resultGetByUserLogin(),
+        ...options,
+    });
+};
+
+export const useResultByIdQuery = (
+    id,
+    options?: UseQueryOptions<IResultDetailResponse, IBaseResponse<unknown>>
+) => {
+    return useQuery({
+        queryKey: ["result-by-id", id],
+        queryFn: () => resultGetById(id),
+        enabled: !!id,
+        ...options,
+    });
+};
+
+export const useResultPredictByresultId = (
+    id,
+    options?: UseQueryOptions<
+        IResultPredictByResultIdResponse,
+        IBaseResponse<unknown>
+    >
+) => {
+    return useQuery({
+        queryKey: ["result-predict-by-result-id", id],
+        queryFn: () => resultPredictByResultId(id),
+        enabled: !!id,
         ...options,
     });
 };

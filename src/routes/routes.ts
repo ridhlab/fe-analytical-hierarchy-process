@@ -44,4 +44,6 @@ export enum EndpointApi {
     ResultByUserLogin = "/result-by-user-login",
     ResultDetail = "/result/:id",
     ResultPredict = "/predict",
+
+    ResultPredictGetByResultID = "/result-predict/:resultId",
 }

@@ -33,6 +33,7 @@ const MatrixCompareEditByInputPage = React.lazy(
 
 const ResultIndexPage = React.lazy(() => import("@/pages/Result"));
 const ResultCreatePage = React.lazy(() => import("@/pages/Result/Create"));
+const ResultDetailPage = React.lazy(() => import("@/pages/Result/Detail"));
 
 export const withSuspense = (component: ReactNode) => {
     return <Suspense fallback={<LoaderFullscreen />}>{component}</Suspense>;
@@ -140,6 +141,14 @@ export const router = createBrowserRouter([
         element: withSuspense(
             <PrivateRoute>
                 <ResultCreatePage />
+            </PrivateRoute>
+        ),
+    },
+    {
+        path: Routes.ResultDetail,
+        element: withSuspense(
+            <PrivateRoute>
+                <ResultDetailPage />
             </PrivateRoute>
         ),
     },
