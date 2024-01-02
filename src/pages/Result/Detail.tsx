@@ -36,7 +36,7 @@ const DetailResultPredict: React.FC = () => {
     ];
 
     const mainContent = (
-        <Row gutter={20} justify="center">
+        <Row gutter={20} justify="start">
             <Col>
                 <Table
                     pagination={false}
@@ -63,13 +63,15 @@ const DetailResultPredict: React.FC = () => {
             title="Detail Predict"
             breadcrumbs={Breadcrumbs.Result.Detail(id)}
         >
-            <Card>
-                {query?.isLoading || query?.isFetching ? (
-                    <LoaderCenter />
-                ) : (
-                    mainContent
-                )}
-            </Card>
+            {query?.isLoading || query?.isFetching ? (
+                <LoaderCenter />
+            ) : (
+                <Card
+                    title={`Result predict for ${query?.data?.data?.result?.name}`}
+                >
+                    {mainContent}
+                </Card>
+            )}
         </MainLayout>
     );
 };
